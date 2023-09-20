@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/allLayout}">
+<th:block layout:fragment="css">
+    <link rel="stylesheet" href="../css/reservation.css">
+</th:block>
+    <!-- 예약 페이지 & 결제 페이지 -->
+    <!-- 예약하기 페이지 자체가 로그인 해야지만 갈 수 있게 설정해야된다. -->
+<th:block layout:fragment="content">
+        <div class="errorPage" th:value="${noPoint}" style="display:none;" >
+            <div class="errBackGround">
+                <div class="errAlert">
+                    <form th:action="'/camput/detail/'+${finalReservationInfo.getCampName()}" class="content" method="get">
+                        <div class="errContent">포인트가부족합니다</div>
+                        <button class="goToBack">뒤로가기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="innerconRE" >
+            <div class="priceBox">
+                <div class="booking_title">
+                    <div class="title_txt">
+                        <i class="fa-regular fa-calendar-check"></i>
+                        예약자 정보
+                    </div>
+                    <div class="member_info" th:object="${memberInfo}">
+                        <p class="info_txt">투숙객 이름</p>
+                        <div class="name info" th:text="*{memberName}">kk</div>
+                        <p class="info_txt">핸드폰 번호</p>
+                        <div class="phone info" th:text="*{memberPhone}">010-1234-1234</div>
+                        <!-- <p class="info_txt">총 예약 인원</p>
+                        <div class="member_number info" th:text="*{}">2명</div> -->
+                    </div>
+                </div>
+                <div class="member_booking">
+                    <div class="booking_con">
+                        <div class="title_txt">
+                            <i class="fa-solid fa-list-check"></i>
+                            예약 정보
+                        </div>
+                        <table th:object="${finalReservationInfo}">
+                            <tr>
+                                <td class="title" colspan="2">숙소이름</td>
+                            </tr>
+                            <tr>
+                                <th  class="content" colspan="2" th:text="*{campName}">캠프캠프</th>
+                            </tr>
+                            <!-- <tr>
+                                <td class="title" colspan="2">기간</td>
+                            </tr> -->
+                            <tr>
+                                <td class="title" colspan="2">체크인</td>
+                            </tr>
+                            <tr>
+                                <td  class="content" colspan="2" th:text="*{startReservationDay}"> 12:00</td>
+                            </tr>
+                            <tr>
+                                <td class="title" colspan="2">체크아웃</td>
+                            </tr>
+                            <tr>
+                                <th class="content" colspan="2" th:text="*{endReservationDay}"> 13:00</th>
+                            </tr>
+                            <tr id="last">
+                                <td class="title">구매총액</td>
+                                <td  class="content" th:text="${finalReservationInfo.price}+'P'"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="booking_total">
+                        <div class="price_total">
+                            <form action="/camput/reservationPage/init" method="post"  th:object="${finalReservationInfo}" class="finalReservation">
+                                <input type="hidden" th:value="*{startReservationDay}" name="startReservationDay">
+                                <input type="hidden" th:value="*{endReservationDay}" name="endReservationDay">
+                                <input type="hidden" th:value="*{campName}" name="campName">
+                                <input type="hidden" th:value="*{price}" name="price">
+                                <table th:object="${memberInfo}" >
+                                    <tr>
+                                        <td class="title">구매총액</td>
+                                        <th class="content" th:text="${finalReservationInfo.price}+'P'">838,383</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="title">현재보유포인트</td>
+                                        <th  class="content" th:text="${memberInfo.point} + 'P'" >200,000</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="title">결제 후 포인트</td>
+                                        <td  class="content" th:text="${memberInfo.afterMemberPoint}+'P'" style="color: #dc3545"><input type="hidden" name="afterPoint" th:value="${memberInfo.afterMemberPoint}+'P'"></td>
+                                    </tr>
+                                </table>
+                                <div class="cash"><button type="button" onclick="booking()"><i class="fa-solid fa-money-check-dollar"></i> 결제하기</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+<th:block layout:fragment="script">
+    <script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        var startReservationDay = [[${finalReservationInfo.startReservationDay}]];
+        var endReservationDay = [[${finalReservationInfo.endReservationDay}]];
+        var campName = [[${finalReservationInfo.campName}]];
+        var price = [[${finalReservationInfo.price}]];
+    </script>
+    <script type="text/javascript" src="/js/reservation.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <!-- 아이콘 -->
+    <script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+</th:block>
+
+</html>

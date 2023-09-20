@@ -1,0 +1,83 @@
+@import url("/css/reset.css");
+/* 라인 */
+@font-face { font-family: 'LINESeedKR-Bd'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2'); font-weight: 700; font-style: normal; }
+/* 티머니 */
+@font-face { font-family: 'TmoneyRoundWindExtraBold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindExtraBold.woff') format('woff'); font-weight: normal; font-style: normal; }
+*{font-family:'TmoneyRoundWindExtraBold'; -webkit-text-size-adjust: auto;}
+
+.wrap{
+    width: 100%; height: 100vmax;
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+}
+.main{
+    width: 100%;margin: 0 auto;
+    display: flex;
+    flex-direction: column; align-items: center;
+}
+/* 스크롤제거 */
+body{
+    -ms-overflow-style: none; /* 인터넷 익스플로러 */
+    scrollbar-width: none; /* 파이어폭스 */
+}
+::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+}
+.logo{
+    background-image: url(/img/logo.png);
+    background-repeat: no-repeat; background-size: contain;
+    width: 30%; padding-bottom: 30%;
+    margin-top: 0%;
+}
+.find_Info_Txt{
+    text-align: center; color: #fff;
+    margin: 2% auto;
+}
+.find_Info_Txt h3{font-size: 3vw; margin-bottom: 2%;}
+.find_Info_Txt p{font-size: 1.3vw;}
+
+.noFind_Pw{width: 100%;}
+.box{width: 100%;display: flex;flex-direction: column;align-items: center;}
+/*#pwUpdate{width: 100%;display: flex;flex-direction: column;align-items: center;}*/
+.center{width: 25%;display: flex;flex-direction: column;align-items: center;}
+input{
+    border-radius: 20px;
+    padding: 5%; margin: 1% 0; width: 100%;
+    font-size: 1.3vw; font-family: 'TmoneyRoundWindExtraBold';
+}
+.BTN{
+    box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.4);
+    border: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #ffa600;
+}
+#checkId{
+    transition: 0.5s, color 0.5s ease-in-out;
+}
+#checkId:hover{
+    background-color: #ffa600;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* 아이디 인증 후 */
+
+/* 서브 */
+.loginSub{width: 100%; margin: 4% 0; text-align: center;}
+.loginSub a{
+    font-size: 1.3vw;
+    color: #fff;
+}
+.loginSub a::after{
+    content: "|";
+    margin: 0 2%;
+}
+.loginSub a:last-child::after{display: none;}
+
+/*비밀번호 변경*/
+.passwordBtn{font-size: 2.5vw;}
+.passwordBtn{
+    transition: 0.5s, color 0.5s ease-in-out
+}
+.passwordBtn:hover{
+    background-color: #ffa600;
+    color: rgba(255, 255, 255, 0.8);
+}

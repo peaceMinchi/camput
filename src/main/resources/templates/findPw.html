@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find_Pw</title>
+  <!-- css -->
+  <link rel="stylesheet" href="../css/findPw.css" />
+  <!--    스크립트 -->
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="/js/findPw.js"></script>
+</head>
+<body>
+<!-- 비밀번호 찾기 페이지 -->
+<div class="wrap">
+  <div class="main">
+    <!-- 로고 -->
+    <div class="logo"><a href="#"></a></div>
+
+    <!-- 로그인 입력 -->
+    <div class="find_Info_Txt">
+      <h3>비밀번호 찾기</h3>
+      <p>회원정보를 입력해주세요</p>
+    </div>
+
+    <!-- 비밀번호 찾기 -->
+    <div class="noFind_Pw">
+      <!-- 아이디 인증 전 -->
+      <div id="checkBox" class="box">
+        <form class="center" action="/camput/findPw/id" method="post">
+<!--          <label for="memberLoginId"></label>-->
+          <input type="text" id="memberLoginId" class="form-control BTN" name="memberLoginId" required placeholder="Login ID"/>
+          <input type="button" class="chekBtn BTN" value="Check Id" id="checkId" onclick="findPw_check()" />
+        </form>
+        <span id="idCheckResult"></span>
+      </div>
+
+      <!-- 아이디 인증 후 -->
+        <div id="pwUpdate" class="box" style="display: none">
+          <form action="/member/pwUpdate" method="post" name="pwUpdate" class="center">
+            <input type="password" id="memberPassword" name="memberPassword" class="BTN" maxlength="20" placeholder="변경할 비밀번호를 입력해주세요"/>
+            <span class="lbl"><span id="error_txt_pwd" class="step_txt"></span></span>
+            <input type="password" id="memberPassword2" name="memberPassword2" class="BTN" maxlength="20" placeholder="비밀번호 확인" />
+            <span class="error_next_box" id="error_txt_pwd2"></span>
+            <!-- 아이디, 비밀번호 찾기 & 회원가입 링크 -->
+            <div class="loginSub">
+              <a href="findId">아이디 찾기</a>
+              <a href="join">회원가입</a>
+            </div>
+            <button type="submit" class="passwordBtn BTN" onclick="passwordBtn(); return false">비밀번호 변경</button>
+          </form>
+        </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

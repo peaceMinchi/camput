@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find_Id</title>
+    <!-- css -->
+    <link rel="stylesheet" href="../css/findId.css">
+    <!--스크립트 -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/myPageMemberInfo.js"></script>
+    <script src="/js/findId.js"></script>
+</head>
+<body>
+      <!-- 아이디 찾기 페이지 -->
+    <div class="wrap">
+
+        <div class="main">
+            <!-- 로고 -->
+            <div class="logo"><a href="#"></a></div>
+            <!-- 로그인 입력 -->
+            <div class="find_info_txt">
+                <h3>아이디 찾기</h3>
+                <p>회원정보를 입력해주세요</p>
+            </div>
+            <div class="noFind_Id">
+                <!-- 아이디 찾기 후 페이지 모달로 처리 예정 -->
+                <div id="modal" style="display: none;">
+                    <div class="modal_box">
+                        <div id="modal_body"></div>
+                        <div class="find_Id_Btn">
+                            <button class="findBtn"><a href="findId">비밀번호 찾기</a></button>
+                            <button class="joinBtn"><a href="login">로그인</a></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- <button id="open_modal">Modal나오기</button> -->
+                <form action="/camput/findId" method="post" class="findId" name="findId">
+                    <input type="text" id="nickName" name="nickName" placeholder="닉네임을 입력해주세요.">
+                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="전화번호를 입력해주세요.">
+                    <!-- 아이디, 비밀번호 찾기 & 회원가입 링크 -->
+                    <div class="loginSub">
+                        <a href="findPw">비밀번호 찾기</a>
+                        <a href="join">회원가입</a>
+                    </div>
+                    <input type="button" class="BTN" id="open_modal" value="Find" onclick="findId_click()">
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property='og:title', content= '일상에 캠프를 얹다(Camput)'/>
+<meta property='og:description', content= '일상에 캠프를 얹다(Camput)'/>
+<meta property='og:type', content= 'website'/>
+<meta property='og:url', content= '공유될 URL'/>
+<meta property='og:image', content= '썸네일 이미지'/>
+<title>Document</title>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@Camput" />
+<meta name="twitter:title" content="일상에 캠프를 얹다(Camput)" />
+<meta name="twitter:description" content="일상에 캠프를 얹다(Camput)." />
+<meta property="twitter:image" content="http://richclub8.dothome.co.kr/assets/ico/icon.png" />
+<!-- Facebook meta tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="일상에 캠프를 얹다(Camput)" />
+<meta property="og:url" content="http://richclub8.dothome.co.kr/responsive/html5/index.html" />
+<meta property="og:image" content="http://richclub8.dothome.co.kr/assets/ico/icon.png" />
+<meta property="og:site_name" content="일상에 캠프를 얹다(Camput)" />
+<meta property="og:description" content="일상에 캠프를 얹다(Camput)" />
+
+<!-- header -->
+<script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+<!-- css -->
+<link rel="stylesheet" href="/css/header.css">
+<!--스크립트 -->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+<script src="/js/header.js"></script>
+<script th:inline="javascript">var loginCheck = [[${member}]];</script>
+<script type="text/javascript" src="/js/loginCheck.js"></script>
+
+<!--footer-->
+<script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+<!-- css -->
+<link rel="stylesheet" href="/css/footer.css">
+<!--스크립트 -->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/footer.js"></script>
+<th:block layout:fragment="css"></th:block>
+</head>
+
+<body>
+  <header th:replace="fragments/header :: headerFragment"></header>
+  <div layout:fragment="content"></div>
+  <th:block th:replace="fragments/footer :: footerFragment"></th:block>
+  <footer layout:fragment="script"></footer>
+</body>
+
+</html>

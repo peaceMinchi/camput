@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/allLayout}">
+<title>게시글 상세 페이지</title>
+<th:block layout:fragment="css">
+    <!-- css -->
+    <link rel="stylesheet" href="/css/QandAView.css">
+</th:block>
+
+    <div class="wrap" layout:fragment="content"ß>
+        <div class="QandAView">
+            <div class="boardTitle">
+                <a href=""> Q & A </a>
+            </div>
+            <div class="section">
+                <div class="qnadetailTop">
+                    <h1 th:text="${qna.qnaTitle}">제목</h1>
+                    <p th:text="${qna.qnaContent}">내용</p>
+                </div>
+                <div class="qnadetailBotton">
+                    <a th:if="${loginMember == qna.memberLoginId}" th:href="@{/QnA/delete(id=${qna.id})}"><i class="fa-solid fa-xmark"></i> 글삭제</a>
+                    <a th:if="${loginMember == qna.memberLoginId}" th:href="@{/QnA/modify/{id}(id = ${qna.id})}"><i class="fa-regular fa-square-minus"></i> 수정</a>
+                </div>
+                <!-- 댓글 작성부분 -->
+                <div id="comment-write">
+                    <input type="text" id="commentWriter" th:value="${loginMember}" readonly>
+                    <input type="text" id="commentContents" placeholder="댓글을 입력하세요">
+                    <input type="hidden" id="qnaId" th:value="${qna.id}">
+                    <input type="button" id="comment-write-btn" value="댓글등록">
+                </div>
+                <div id="comment-list">
+                    <div th:each="answer, i : ${qnaAnswerList}">
+                        <span th:text="${answer.memberLoginId}"></span>
+                        <input th:value="${answer.qAnswer}" th:if="${loginMember == answer.memberLoginId}" th:name="${answer.id}">
+                        <span th:text="${answer.qAnswer}" th:if="${loginMember != answer.memberLoginId}"></span>
+                        <span th:text="${answer.reqActDate}"></span>
+                        <a th:if="${loginMember == answer.memberLoginId}" th:href="@{/QnA/delete/answer/{id}/{qnaId}(id = ${answer.id}, qnaId = ${qna.id})}" id="answerDeleteBtn"><i class="fa-solid fa-xmark"></i> 삭제</a>
+                        <a th:onclick="|javascript:updateAnswer(${answer.id}, ${qna.id})|" id="answerUpdateBtn"><i class="fa-regular fa-square-minus"></i> 수정</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- wrap -->
+
+    <th:block layout:fragment="script">
+        <!-- 아이콘 -->
+        <script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+        <!--스크립트 -->
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+        <script th:inline="javascript" src="/js/QandAWrite.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function () {
+                $('#comment-write-btn').click(function () {
+                    $.ajax({
+                        type: 'post',
+                        url: '/QnA/insert/answer',
+                        data: {
+                            id: $('#qnaId').val(),
+                            qnaAnswer: $('#commentContents').val()
+                        },
+                        success: function (response) {
+                            console.log('success')
+                            location.reload();
+                        },
+                        error: function (error) {
+                            console.log('error', error)
+                        }
+                    })
+                })
+
+            })
+
+            function updateAnswer (id, qnaId) {
+                console.log($('input[name=" + id + "]').val());
+                $.ajax({
+                    type: 'post',
+                    url: '/QnA/update/answer',
+                    data: {
+                        id: id,
+                        qAnswer: $('input[name=' + id + ']').val(),
+                        qnaId: qnaId
+                    },
+                    success: function (response) {
+                        console.log('success')
+                        location.reload();
+                    },
+                    error: function (error) {
+                        console.log('error', error)
+                    }
+                })
+            }
+        </script>
+    </th:block>
+</html>
+
+

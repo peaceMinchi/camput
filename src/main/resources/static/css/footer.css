@@ -1,0 +1,9 @@
+@import url(../css/reset.css);
+.footer{width: 100%;height: fit-content;text-align: center;background: #fff;padding: 5% 0;}
+.footer .foot_top{width: 100%; display: flex;justify-content: center;align-items: center;}
+.footer .foot_top ul{width: 30%;}
+.footer .foot_top li{display:inline-block; font-size: 2rem; margin: 0 5%;} 
+.footer .foot_bottom li{display: inline; padding: 0 7px 0 10px; white-space:nowrap;}
+.footer .foot_bottom li::before{content: ''; width: 1px;height: 12px; background-color: #dbdbdb; position: absolute;left: 0;top: 2px;}
+.footer .foot_bottom li:first-child::before{width: 0;}
+.footer .foot_bottom address{padding-top: 15px;}

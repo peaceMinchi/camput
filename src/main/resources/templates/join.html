@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css -->
+    <link rel="stylesheet" href="/css/join.css" />
+    <script th:inline="javascript" src="/js/join.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <title>Join</title>
+</head>
+<body>
+<!-- <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>-->
+<script>
+<!--    new daum.Postcode({-->
+<!--        oncomplete: function(data) {-->
+<!--        &lt;!&ndash;             팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.&ndash;&gt;-->
+<!--        &lt;!&ndash;             예제를 참고하여 다양한 활용법을 확인해 보세요.&ndash;&gt;-->
+<!--        }-->
+<!--    }).open();-->
+</script>
+    <!-- 회원가입 페이지 -->
+    <div class="wrap" align="center">
+
+        <!-- 로그인 페이지 -->
+        <div class="join">
+            <div class="backImg">
+                <div class="main">
+                <!-- 로고 -->
+                <div class="logo"><a href="home"></a></div>
+                    <div class="joinBox">
+                        <!-- 회원가입 폼 -->
+                        <form action="/camput/member/join" class="basics" method="post" name="saveJoin">
+                            <!-- id, 비밀번호 -->
+                            <div class="join_row">
+                                <h3 class="join_title"><label for="memberLoginId">아이디</label></h3>
+                                <span class="ps_box int_id">
+                                    <input type="text" id="memberLoginId" name="memberLoginId" class="int" maxlength="50" onkeydown="inputIdChk()" placeholder="영문자(소) 또는 숫자 6 ~ 20자">
+                                    <input type="button" class="loginBtn" value="ID중복확인" onClick="idCheck(this.form.memberLoginId.value); return false;">
+                                    <input type="hidden" name="idbtncheck" value="idUncheck">
+                                </span>
+                                <span class="error_next_box" id="idMsg" aria-live="assertive" ></span>
+                            </div>
+                            <!-- // 비밀번호 -->
+                            <div class="join_row">
+                                <h3 class="join_title"><label for="memberPassword">비밀번호</label></h3>
+                                <span class="ps_box int_pass">
+                                        <input type="password" id="memberPassword" name="memberPassword" class="int" maxlength="20" placeholder="영문, 숫자, 특수문자 최소 하나씩 8 ~ 16자"/>
+                                <span class="lbl"><span id="error_txt_pwd" class="step_txt"></span></span>
+                                </span>
+                                <!-- 비밀번호 확인 -->
+                                <h3 class="join_title"><label for="memberPassword2">비밀번호 확인</label></h3>
+                                <span class="ps_box int_pass_check">
+                                        <input type="password" id="memberPassword2" name="memberPassword2" class="int" maxlength="20" placeholder="위와 같은 비밀번호를 입력">
+                                    </span>
+                                <span class="error_next_box" id="error_txt_pwd2"></span>
+                            </div>
+                            <!-- // id, 비밀번호 -->
+                            <!-- 이름  -->
+                            <div class="join_row">
+                                <h3 class="join_title"><label for="memberName">이름</label></h3>
+                                <span class="ps_box int_name">
+                                        <input type="text" id="memberName" name="memberName" class="int" maxlength="40" placeholder="한글 2글자 ~ 10글자">
+                                    </span>
+                                <span class="error_next_box" id="error_txt_name"></span>
+                            </div>
+                            <!-- //이름 -->
+                            <!-- 닉네임 -->
+                            <div class="join_row">
+                                <h3 class="join_title"><label for="nickName">닉네임</label></h3>
+                                <span class="ps_box int_nickName">
+                                        <input type="text" id="nickName" name="nickName" class="int" maxlength="40" placeholder="한글, 영어, 숫자 2글자 ~ 10글자">
+                                    </span>
+                                <span class="error_next_box" id="error_txt_nickName"></span>
+                            </div>
+                            <!-- //닉네임 -->
+                            <!-- 이메일 -->
+                            <div class="join_row">
+                                <h3 class="join_title"><label for="memberEmail">이메일</label></h3>
+                                <span class="ps_box int_nickName">
+                                        <input type="text" id="memberEmail" name="memberEmail" class="int" maxlength="40" placeholder="이메일 형식으로 작성">
+                                    </span>
+                                <span class="error_next_box" id="error_txt_memberEmail"></span>
+                            </div>
+                            <!-- //이메일 -->
+                            <!-- 전화번호 -->
+                            <div class="join_row">
+                                <h3 class="join_title"><label for="phoneNumber">전화번호</label></h3>
+                                <span class="ps_box int_phone">
+                                        <input type="text" id="phoneNumber" name="phoneNumber" class="int" maxlength="11" placeholder="핸드폰 양식 번호 입력">
+                                    </span>
+                                <span class="error_next_box" id="error_txt_phone"></span>
+                            </div>
+                            <!-- // 전화번호 -->
+                            <!-- 주소 -->
+<!--                            <div class="join_row">-->
+<!--                                <h3 class="join_title"><label for="address">주소</label></h3>-->
+                            <input type="text" class="int" id="sample4_postcode" name="memberPostNum" placeholder="우편번호" readonly>
+                            <input type="button" class="int addsBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+                            <input type="text" class="int" id="sample4_roadAddress" name="streetAddress" placeholder="도로명주소" readonly>
+                            <input type="text" class="int" id="sample4_jibunAddress" name="mainAddress" placeholder="지번주소" readonly>
+                            <span id="guide" style="color:#999;display:none"></span>
+                            <input type="text" class="int" id="sample4_extraAddress" name="extraAddress" placeholder="동" readonly>
+                            <input type="text" class="int" id="sample4_detailAddress" name="detailAddress" placeholder="상세주소">
+                            <span class="error_next_box" id="error_txt_address"></span>
+                            <!-- 성별 -->
+                            <div class="join_row">
+                                <h3 class="join_title"><label for="gender">성별</label></h3>
+                                <div class="ps_box int_gender">
+                                    <select id="gender" name="gender" class="sel init" aria-label="성별">
+                                        <option value="" selected="">성별</option>
+                                        <option value="남">남자</option>
+                                        <option value="여">여자</option>
+                                    </select>
+                                    <span class="error_next_box" id="error_txt_gender"></span>
+                                </div>
+                            </div>
+                            <!-- // 성별 -->
+                            <!-- 생일 -->
+                            <div class="join_row">
+                                <h3 class="join_title"><label for="birthday">생년월일</label></h3>
+                                <span class="ps_box int_birthday">
+                                        <input type="text" id="birthday" name="birthday" class="int" maxlength="8" placeholder="생년월일 8자리 입력">
+                                    </span>
+                                <span class="error_next_box" id="error_txt_birthday"></span>
+                            </div>
+                            <!-- // 생년월일 -->
+                            <!-- 가입 -->
+                            <div class="join_btn">
+                                <!--<input type="submit" value="회원가입" id="submitButton">-->
+                                <button class="submitButton" onclick="submitButton(); return false;">회원가입</button>
+                            </div>
+                            <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                            <script>
+                                //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+                                function sample4_execDaumPostcode() {
+                                    new daum.Postcode({
+                                        oncomplete: function(data) {
+                                            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                                            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                                            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                                            var roadAddr = data.roadAddress; // 도로명 주소 변수
+                                            var extraRoadAddr = ''; // 참고 항목 변수
+
+                                            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                                            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                                            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                                                extraRoadAddr += data.bname;
+                                            }
+                                            // 건물명이 있고, 공동주택일 경우 추가한다.
+                                            if(data.buildingName !== '' && data.apartment === 'Y'){
+                                            extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                                            }
+                                            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                                            if(extraRoadAddr !== ''){
+                                                extraRoadAddr = ' (' + extraRoadAddr + ')';
+                                            }
+
+                                            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                                            document.getElementById('sample4_postcode').value = data.zonecode;
+                                            document.getElementById("sample4_roadAddress").value = roadAddr;
+                                            document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+
+                                            // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                                            if(roadAddr !== ''){
+                                                document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                                            } else {
+                                                document.getElementById("sample4_extraAddress").value = '';
+                                            }
+
+                                            var guideTextBox = document.getElementById("guide");
+                                            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                                            if(data.autoRoadAddress) {
+                                                var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                                                guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                                                guideTextBox.style.display = 'block';
+
+                                            } else if(data.autoJibunAddress) {
+                                                var expJibunAddr = data.autoJibunAddress;
+                                                guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                                                guideTextBox.style.display = 'block';
+                                            } else {
+                                                guideTextBox.innerHTML = '';
+                                                guideTextBox.style.display = 'none';
+                                            }
+                                        }
+                                    }).open();
+                                }
+                            </script>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- wrap -->
+</body>
+</html>

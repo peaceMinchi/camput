@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/allLayout}">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" href="/css/myPageMemberInfo.css" />
+</th:block>
+
+    <div class="wrap" layout:fragment="content">
+        <!-- 모달 -->
+        <div class="modal">
+            <div class="checkMember-wrap" >
+                <div class="checkMember">
+                    <div class="checkMemberTitle" >
+                        <div class="titleName">비밀번호 확인</div>
+                        <button type="button" class="close" onclick="hideWindow()">X</button>
+                    </div>
+                    <div class="content">비밀번호를 입력해주세요.</div>
+                    <div class="contentInput">
+                        <input class="pwCheck" type="password" placeholder="  비밀번호를 입력해주세요." onclick="hideWarring()" value="">
+                        <div class="warring" style="color: red;display: none" >비밀번호가 일치하지 않습니다</div>
+                        <button type="button" class="memberInfoChange" onclick="checkMember()">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 메인 -->
+        <div class="myPageMemberInfoRe">
+            <div class="miniHeader">
+                <div class="memberImage"><i class="fa-solid fa-user"></i></div>
+                <div class="memberNickName" th:text="${nickName}">닉네임</div>
+            </div>
+            <div class="incon">
+                <div class="aside">
+                    <p>
+                        <span class="memberInfo to-right-underline"><a href="./information">회원정보</a></span>
+                        <span class="memberRservationInfo to-right-underline"><a href="./bookInfo">예약정보</a></span>
+                        <span class="wishList to-right-underline"><a href="./like">위시리스트</a></span>
+                    </p>
+                </div>
+                <div class="section">
+                    <div class="middleInfoContent" th:object="${memberInfo}">
+                        <ul>
+                        <li class="title">이름</li>
+                        <li class="name" th:text="*{name}">김씨</li>
+                        <li class="title">아이디</li>
+                        <li class="id" th:text="*{memberLoginId}">asd123</li>
+                        <li class="title">이메일</li>
+                        <li class="email" th:text="*{memberEmail}">asd123@naver.com</li>
+                        <li class="title">생일</li>
+                        <li class="birth" th:text="*{memberBirth}">1997.11.04</li>
+                        <li class="title">성</li>
+                        <li class="gender" th:text="*{gender}">남</li>
+                        <li class="title">주소</li>
+                        <li class="address" th:text="*{memberAddress}">서울에서 살고 싶어요</li>
+                        <li class="title">전화번호</li>
+                        <li class="phoneNum" th:text="*{memberPhoneNum}">010-1234-1234</li>
+                        </ul>
+                    </div>
+                    <div class="middleBottom">
+                        <button type="button" class="openCheckWindow" onclick="showCheckWindow()">회원정보 수정</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<th:block layout:fragment="script">
+    <!--    스크립트 -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/js/myPageMemberInfo.js"></script>
+    <!-- 아이콘 -->
+    <script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+</th:block>
+</th:block>
+</html>

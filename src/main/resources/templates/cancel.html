@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/allLayout}">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" href="/css/cancel.css">
+</th:block>
+
+    <div class="wrap" layout:fragment="content">
+        <!-- 예약 페이지 & 결제 페이지 -->
+        <!-- 예약하기 페이지 자체가 로그인 해야지만 갈 수 있게 설정해야된다. -->
+        <header>
+            <!-- header01.html or hearder01.html -->
+        </header>
+        <div class="innercon" >
+            <div class="cancelBox" >
+                <div class="cancel_title">
+                    <div class="title_txt">
+                        <i class="fa-regular fa-calendar-check"></i>
+                        예약자 정보
+                    </div>
+                    <div class="member_info" th:object="${info}">
+                        <p class="info_txt">투숙객 이름</p>
+                        <div class="name info" th:text="*{memberName}">kk</div>
+                        <p class="info_txt">핸드폰 번호</p>
+                        <div class="phone info" th:text="*{memberPhone}">010-1234-1234</div>
+                        <!-- <p class="info_txt">총 예약 인원</p>
+                        <div class="member_number info" th:text="*{}">2명</div> -->
+                    </div>
+                </div>
+                <div class="member_booking">
+                    <div class="booking_con">
+                        <div class="title_txt">
+                            <i class="fa-solid fa-list-check"></i>
+                            예약 정보
+                        </div>
+                        <table th:object="${info}">
+                            <tr>
+                                <td class="title" colspan="2">숙소이름</td>
+                            </tr>
+                            <tr>
+                                <th class="content" colspan="2" th:text="*{campName}">캠프캠프</th>
+                            </tr>
+                            <tr>
+                                <td class="title" colspan="2">체크인</td>
+                            </tr>
+                            <tr>
+                                <td class="content" colspan="2" th:text="*{startReservationDay}"> 12:00</td>
+                            </tr>
+                            <tr>
+                                <td class="title" colspan="2">체크아웃</td>
+                            </tr>
+                            <tr>
+                                <th class="content" colspan="2" th:text="*{endReservationDay}"> 13:00</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="cancel_total">
+                        <div class="price_total">
+                            <form action="/camput/rservation/cancel/deleteReaervation" method="post"  th:object="${info}" class="finalReservation">
+                                <input type="hidden" th:value="*{bookedDay}" name="startReservationDay">
+                                <input type="hidden" th:value="*{startReservationDay}" name="startReservationDay">
+                                <input type="hidden" th:value="*{endReservationDay}" name="endReservationDay">
+                                <input type="hidden" th:value="*{campName}" name="campName">
+                                <input type="hidden" th:value="*{price}" name="price">
+                                <table th:object="${info}" >
+                                    <tr>
+                                        <td class="title">구매총액</td>
+                                        <th class="content" th:text="${info.price}+'P'"></th>
+                                    </tr>
+                                    <tr>
+                                        <td class="title">현재보유포인트</td>
+                                        <th class="content" th:text="${info.point}+'P'"></th>
+                                    </tr>
+                                    <tr>
+                                        <td class="title">환불 후 포인트</td>
+                                        <th class="content" th:text="*{afterMemberPoint}" style="color: green"><input type="hidden" name="afterPoint" th:value="${info.afterMemberPoint}+'P'"></th>
+                                    </tr>
+                                </table>
+                                <div class="cash"><button type="button" onclick="cancel()"><i class="fa-solid fa-money-check-dollar"></i> 예약 취소하기</button></div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="cancelReservation" >
+                        <div class="successCancel" style="display: none">
+                            <div class="successTitle">예약취소가 완료되었습니다!</div>
+                            <form class="goToHome" method="get" action="/camput/myPage/bookInfo">
+                                <button>HOME</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- innercon -->
+    </div> <!-- wrap -->
+<th:block layout:fragment="script">
+    <script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        var bookedDay = [[${info.bookedDay}]];
+        var startReservationDay = [[${info.startReservationDay}]];
+        var endReservationDay = [[${info.endReservationDay}]];
+        var campName = [[${info.campName}]];
+        var price = [[${info.price}]];
+    </script>
+    <script type="text/javascript" src="/js/cancel.js"></script>
+</th:block>
+</html>

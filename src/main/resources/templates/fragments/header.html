@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/allLayout}">
+    <div class="wrap" th:fragment="headerFragment">
+        <script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+        <header>
+        <!-- header01 -->
+            <div class="Logo" onclick="location.href='/camput/home'" ></div>
+            <div class="nav notLogin">
+                <ul class="menuBtn">
+                    <li class="nologin"><a th:href="@{/camput/login}">Login</a></li>
+                    <li class="join"><a th:href="@{/camput/member/join}">Join</a></li>
+                </ul>
+            </div>
+            <!-- 메뉴 -->
+            <div class="nav Login" style="display: none;">
+                <ul class="menuBtn">
+                    <li class="myPageMemberInfo"><a th:href="@{/camput/myPage/information}">Mypage</a></li>
+                    <li class="logout"><a th:href="@{/camput/logout}">logout</a></li>
+                    <li class="menu">
+                    <a href="#"><i class="fa-solid fa-bars"></i></a>
+                        <ul class="miniMenu" style="display: none;">
+                            <li class="qandA gnb_menu"><a th:href="@{/camput/myPage/like}">Wish list</a></li>
+                            <li class="qandA gnb_menu"><a th:href="@{/camput/myPage/bookInfo}">Booking</a></li>
+                            <li class="qandA gnb_menu"><a th:href="@{/QnA/list}">Q & A</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </header>
+    </div>
+</html>

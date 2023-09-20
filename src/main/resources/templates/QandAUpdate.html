@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/allLayout}">
+<title>Update</title>
+<th:block layout:fragment="css">
+  <!-- css -->
+  <link rel="stylesheet" href="/css/QandAUpdate.css">
+</th:block>
+
+  <div class="wrap" layout:fragment="content">
+    <div class="Update">
+      <div class="boardTitle">
+        <a href=""> Q & A </a>
+      </div>
+      <div class="section">
+          <div class="layout">
+            <form th:action="@{/QnA/update/{id}(id = ${qna.id})}" method="post">
+              <input name="qnaTitle" type="text" th:value="${qna.qnaTitle}" placeholder="제목을 입력해주세요.">
+              <textarea name="qnaContent" th:text="${qna.qnaContent}" placeholder="내용을 입력해주세요."></textarea>
+              <input type="hidden" name="qnaUpdateDate" th:value="${qna.qnaUpdateDate}">
+              <button type="submit">수정</button>
+            </form>
+          </div>
+        </div><!--section-->
+      </div><!--Update-->
+  </div><!--wrap-->
+
+<th:block layout:fragment="script">
+  <!-- 아이콘 -->
+  <script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+  <script th:inline="javascript" src="/js/QandAUpdate.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+</th:block>
+</html>

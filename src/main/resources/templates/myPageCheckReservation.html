@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/allLayout}">
+<title>myPageCheckReservation </title>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" href="/css/myPageCheckReservation.css">
+</th:block>
+
+    <div class="wrap" layout:fragment="content">
+        <div class="myPageCheckReservation">
+            <div class="miniHeader">
+                <div class="memberImage"><i class="fa-solid fa-user"></i></div>
+                <div class="memberNickName" th:text="${memberNickName}">닉네임</div>
+            </div>
+            <div class="inner middle">
+                <div class="sideBar">
+                    <ul>
+                        <li class="memberInfo to-right-underline"><a href="./information">회원정보</a></li>
+                        <li class="memberRservationInfo to-right-underline"><a href="./bookInfo"><strong>예약정보</strong></a></li>
+                        <li class="wishList to-right-underline"><a href="./like">위시리스트</a></li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="middleInfo">
+                        <div class="reservationCampInfo" th:if="${not #lists.isEmpty(bookedCamps)}" th:each="camp:${bookedCamps}">
+                            <div class="reservationCampdetailInfo" >
+                                <div class="reservationCampImage" th:style="'background-image:url('+${camp.getMyPageCampImageUrl()}+');'"></div>
+                                <ul>
+                                    <li class="title">캠핑장 이름</li>
+                                    <li class="content reservationCampName" th:text="${camp.getMyPageCampName()}">캠핑장 이름</li>
+                                    <li class="title">캠핑장 주소</li>
+                                    <li class="content reservationCampAddress" th:text="${camp.getMyPageCampAddress()}">캠핑장 주소</li>
+                                    <li class="title">예약일</li>
+                                    <li class="content reservationCampDate" th:text="${camp.getMyPageCampStartDay()}+' ~ '+${camp.getMyPageCampEndDay()}">예약일</li>
+                                    <li class="cancelButton">
+                                        <form type="get" action="/camput/reservation/cancel">
+                                            <input type="hidden" th:value="${camp.getMyPageCampName()}" name="campName">
+                                            <input type="hidden" th:value="${camp.getMyPageCampDay()}" name="bookedDay">
+                                            <button type="submit" class="cancel"  style="background-size: cover">취소하기</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="bookedPages">
+                            <ul class="pagination"
+                                th:with="start=${(T(java.lang.Math).floor(bookedCamps.getNumber()/5)*5) + 1},
+                                        last=(${start + 4 < bookedCamps.totalPages ? start + 4 : bookedCamps.totalPages})">
+                                <li>
+                                    <a th:href="@{/camput/myPage/bookInfo(page=1)}" aria-label="First">
+                                        <span aria-hidden="true"><i class="fa-solid fa-angles-left"></i></span>
+                                    </a>
+                                </li>
+                                <li th:class="${bookedCamps.first} ? 'disabled'">
+                                    <a th:href="${bookedCamps.first} ? '#' : @{/camput/myPage/bookInfo(page=${bookedCamps.number})}" aria-label="Previous">
+                                        <span aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
+                                    </a>
+                                </li>
+                                <li th:each="page: ${#numbers.sequence(start,last)}" th:class="${page == bookedCamps.number +1} ? 'active'">
+                                    <a th:text="${page}" th:href="@{/camput/myPage/bookInfo(page=${page})}"></a>
+                                </li>
+                                <li th:class="${bookedCamps.last} ? 'disabled'">
+                                    <a th:href="${bookedCamps.last} ? '#' : @{/camput/myPage/bookInfo(page=${bookedCamps.number + 2})}" aria-label="Next">
+                                        <span aria-hidden="true"><i class="fa-solid fa-angle-right"></i></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/camput/myPage/bookInfo(page=${totalPage})}" aria-label="Last">
+                                        <span aria-hidden="true"><i class="fa-solid fa-angles-right"></i></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>  <!--section-->
+            </div>
+        </div>
+    </div>
+
+<th:block layout:fragment="script">
+    <script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+</th:block>
+</html>

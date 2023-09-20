@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- css -->
+    <link rel="stylesheet" href="../css/main.css">
+    <!-- 아이콘 -->
+    <script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+    <!--    스크립트 -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        $(document).ready(function(){
+
+            let loginMember = [[${member}]];
+
+            console.log(loginMember);
+            if(loginMember == false || loginMember == null){ // 로그인 상태가 아닐 때
+                $('.noneMember').hide();
+                $('.memberLogin').show();
+            }else{
+                $('.noneMember').show();
+                $('.memberLogin').hide();
+            }
+        })
+    </script>
+</head>
+<body>
+    <!-- 메인페이지 -->
+    <div class="wrap">
+        <div class="backImg">
+            <div class="innercon">
+                <div class="logo"></div>
+                    <div class="homeBtn">
+                        <button class="mapBtn"><a href="home"> 일상에 캠프를 얹다 <i class="fa-solid fa-caravan"></i></a></button>
+                    </div>
+                <div class="noneMember" style="display: none;">
+                    <a href="">
+                        <object type="image/svg+xml" data="/img/svg/camp.svg" class="camp"></object>
+                        <p>&nbsp;MyPage</p>
+                    </a>
+                    <form action="/camput/logout" method="post">
+                        <button class="logout" type="submit">
+                            <object type="image/svg+xml" data="/img/svg/fire.svg" class="fire"></object>
+                            <p>Logout</p>
+                        </button>
+                    </form>
+                </div>
+                    <div class="memberLogin">
+                        <a href="/camput/login">
+                            <object type="image/svg+xml" data="/img/svg/camp.svg" class="camp"></object>
+                            <p>&nbsp;Login</p>
+                        </a>
+                        <a href="/camput/member/join">
+                            <object type="image/svg+xml" data="/img/svg/fire.svg" class="fire"></object>
+                            <p>&nbsp;Join</p>
+                        </a>
+                    </div>
+            </div>
+        </div>
+    </div> <!-- wrap -->
+</body>
+</html>

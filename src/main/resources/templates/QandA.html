@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/allLayout}">
+<th:block layout:fragment="css">
+    <link rel="stylesheet" href="/css/QandA.css">
+</th:block>
+<!--    <div class="wrap" layout:fragment="content">-->
+        <div class="QandA" layout:fragment="content">
+            <div class="section">
+                <!-- Q & A 페이지-->
+                <div class="table_body">
+                    <div class="boardTop">
+                        <div class="boardTitle">
+                            <a href=""> Q & A </a>
+                        </div>
+                    </div><!-- boardTop-->
+                    <div class="board">
+                        <table class="board_list">
+                            <tr class="titleLine">
+                                <th>게시글 번호</th>
+                                <th>제목</th>
+                                <th>작성자</th>
+                                <th>작성일</th>
+                                <th>조회수</th>
+                            </tr>
+                            <tr class="conLine" th:each="qna, i : ${qnalist}">
+                                <td th:text="${qnalist.getTotalElements() - i.index}"></td>
+                                <td>
+                                    <a th:text="${qna.qnaTitle}" th:href="@{/QnA/view(id=${qna.id})}"></a>
+                                </td>
+                                <td th:text="${qna.memberLoginId}" }></td>
+                                <td th:text="${qna.qnaUpdateDate}"></td>
+                                <td th:text="${qna.viewCount}"></td>
+                            </tr>
+                        </table>
+                        <div class="qnaPagination">
+                            <div class="newWrite"><a th:if="${loginMember}" class="newWrite" th:href="@{/QnA/write}">글쓰기</a></div>
+                            <ul class="pagination" th:with="start=${(T(java.lang.Math).floor(qnalist.getNumber()/10)*10) + 1},
+                                last=(${start + 9 < qnalist.totalPages ? start + 9 : qnalist.totalPages})">
+                                <li>
+                                    <a th:href="@{/QnA/list(page=1)}" aria-label="First">
+                                        <span aria-hidden="true"><i class="fa-solid fa-angles-left"></i></span>
+                                    </a>
+                                </li>
+                                <li th:class="${qnalist.first} ? 'disabled'">
+                                    <a th:href="${qnalist.first} ? '#' : @{/QnA/list(page=${qnalist.number})}"
+                                        aria-label="Previous">
+                                        <span aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
+                                    </a>
+                                </li>
+                                <li th:each="page: ${#numbers.sequence(start,last)}"
+                                    th:class="${page == qnalist.number +1} ? 'active'">
+                                    <a th:text="${page}" th:href="@{/QnA/list(page=${page})}"></a>
+                                </li>
+                                <li th:class="${qnalist.last} ? 'disabled'">
+                                    <a th:href="${qnalist.last} ? '#' : @{/QnA/list(page=${qnalist.number + 2})}"
+                                        aria-label="Next">
+                                        <span aria-hidden="true"><i class="fa-solid fa-angle-right"></i></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/QnA/list(page=${totalPage + 1})}" aria-label="Last">
+                                        <span aria-hidden="true"><i class="fa-solid fa-angles-right"></i></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="search">
+                                <input type="text" name="searchKeyword" class="searchKeyword" id="searchKeyword" placeholder="검색어를 입력해 주세요." />
+                                <input type="button" class="searchBtn" value="검색" id="searchButton" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block layout:fragment="script">
+        <script th:inline="javascript" src="../js/QandA.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+                integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+
+
+        <script>
+            $(document).ready(function () {
+                $("#searchButton").click(function () {
+                    location.href = "/QnA/list?searchKeyword=" + $("#searchKeyword").val(); // 값 넘기기
+
+                    $("#searchKeyword").val(""); // 값 초기화
+                });
+            });
+        </script>
+    </th:block>
+</html>

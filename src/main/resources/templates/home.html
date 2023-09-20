@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/allLayout}">
+<th:block layout:fragment="css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel='icon' type='images/png' href='../img/logo.png'>
+</th:block>
+<div class="home" layout:fragment="content">
+    <div class="middle-wrap">
+        <div class="middle">
+            <div class="campTopSevenContent">
+                <div class="animate__animated animate__fadeIn one">EVERY WHERE</div>
+                <div class="animate__animated animate__fadeIn two">ANY WHERE</div>
+                <div class="animate__animated animate__fadeIn three">WE CAN GO!</div>
+            </div>
+            <div class="toparea">
+                <div class="campIcon">CMAP TOP5</div>
+                <div class="campTopSeven">
+                    <div class="pre ToptButton"><i class="fa-solid fa-angle-left"></i></div>
+                    <div class="contentarea">
+                        <!--<div class="campSideInfo one"  id="campSideInfo" th:style="'background-image:url('+${topFive.get(0).getImageUrl()}+');'" >
+                            <ul>
+                                <li class="campName"><h1>01.</h1><h2 th:text="*{topFive.get(0).getName()}">이름</h2></li>
+                                <li class="Address campSide" th:text="*{topFive.get(0).getSimpleAddress()}"><p>주소</p></li>
+                                <li class="Contentinner campSide" th:text="*{topFive.get(0).getLineIntro()}"><p>내용</p></li>
+                                <li class="detail campSide" th:text="*{topFive.get(0).getTotalStars()}"><p>평점</p></li>
+                            </ul>
+                        </div>
+                        <div class="campSideInfo two" id="campSideInfo" th:style="'background-image:url('+${topFive.get(1).getImageUrl()}+');'">
+                            <ul>
+                                <li class="campName"><h1>02.</h1><h2 th:text="*{topFive.get(1).getName()}">이름</h2></li>
+                                <li class="Address campSide" th:text="*{topFive.get(1).getSimpleAddress()}"><p>주소</p></li>
+                                <li class="Content campSide" th:text="*{topFive.get(1).getLineIntro()}"><p>내용</p></li>
+                                <li class="detail campSide" th:text="*{topFive.get(1).getTotalStars()}"><p>평점</p></li>
+                            </ul>
+                        </div>
+                        <div class="campSideInfo three" id="campSideInfo" th:style="'background-image:url('+${topFive.get(2).getImageUrl()}+');'">
+                            <ul>
+                                <li class="campName"><h1>03.</h1><h2 th:text="*{topFive.get(2).getName()}">이름</h2></li>
+                                <li class="Address campSide" th:text="*{topFive.get(2).getSimpleAddress()}"><p>주소</p></li>
+                                <li class="Content campSide" th:text="*{topFive.get(2).getLineIntro()}"><p>내용</p></li>
+                                <li class="detail campSide" th:text="*{topFive.get(2).getTotalStars()}"><p>평점</p></li>
+                            </ul>
+                        </div>
+                        <div class="campSideInfo four" id="campSideInfo" th:style="'background-image:url('+${topFive.get(3).getImageUrl()}+');'">
+                            <ul>
+                                <li class="campName"><h1>04.</h1><h2 th:text="*{topFive.get(3).getName()}">이름</h2></li>
+                                <li class="Address campSide" th:text="*{topFive.get(3).getSimpleAddress()}"><p>주소</p></li>
+                                <li class="Content campSide" th:text="*{topFive.get(3).getLineIntro()}"><p>내용</p></li>
+                                <li class="detail campSide" th:text="*{topFive.get(3).getTotalStars()}"><p>평점</p></li>
+                            </ul>
+                        </div>
+                        <div class="campSideInfo five" id="campSideInfo" th:style="'background-image:url('+${topFive.get(4).getImageUrl()}+');'">
+                            <ul>
+                                <li class="campName"><h1>05.</h1><h2 th:text="*{topFive.get(4).getName()}">이름</h2></li>
+                                <li class="Address campSide" th:text="*{topFive.get(4).getSimpleAddress()}"><p>주소</p></li>
+                                <li class="Content campSide" th:text="*{topFive.get(4).getLineIntro()}"><p>내용</p></li>
+                                <li class="detail campSide" th:text="*{topFive.get(4).getTotalStars()}"><p>평점</p></li>
+                            </ul>
+                        </div>-->
+                    </div>
+                    <div class="next ToptButton"><i class="fa-solid fa-angle-right"></i></div>
+                </div>
+            </div>
+            <div class="maparea">
+                <div class="MapTitle"> FIND CAMP!</div>
+                <div class="mapWrap">
+                    <div class="test">
+                        <div class="findCampsUseInfo">
+                            <form class="searchInput" action="/camput/home/search" method="get" onsubmit="return false">
+                                <div class="search-wrap">
+                                    <input class="searchInputText" type="text" placeholder="  시,도(지역)/캠프이름을 입력해주세요." value="" onclick="initPlaceholder()" >
+                                    <button type="button" class="searchButton bt" onclick="searchCamps()">검색</button>
+                                    <button type="button" class="reset bt" onclick="reset()">초기화</button>
+                                    <button type="button" class="fitterButton bt" onclick="filter()">필터</button>
+                                </div>
+                            </form>
+                            <div class="warring" style="display: none; color: red">찾을 수 없습니다</div>
+                            <div class="filterBox" style="display: none;">
+                                <form class="categoryInput" method="get" action="/camput/home/category">
+                                    <div class="filter">
+                                        <div class="filterContent">
+                                            <div class="stars categoryContent">
+                                                <div class="starsTop contentTitle">별점</div>
+                                                <div class="starsSelect">
+                                                    <ul>
+                                                        <li class="one"><input type="radio" name="star" value="1">1점이상</li>
+                                                        <li class="two"><input type="radio" name="star"  value="2">2점이상</li>
+                                                        <li class="three"><input type="radio" name="star" value="3">3점이상</li>
+                                                        <li class="four"><input type="radio" name="star"  value="4">4점이상</li>
+                                                        <li class="noChoice"><input type="radio" id="noChoice" name="star"  value="noChoice" checked="checked1" style="display: none"></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="location categoryContent">
+                                                <div class="locationTop contentTitle">지역</div>
+                                                <div class="locationSelect">
+                                                    <ul>
+                                                        <li class="seoul"><input type="checkbox" name="location" value="서울시">서울시</li>
+                                                        <li class="incheon"><input type="checkbox" name="location" value="인천시">인천시</li>
+                                                        <li class="kangwondo"><input type="checkbox" name="location" value="강원도">강원도</li>
+                                                        <li class="kunggido"><input type="checkbox" name="location" value="경기도">경기도</li>
+                                                        <li class="junlanamdo"><input type="checkbox" name="location" value="전라남도">전라남도</li>
+                                                        <li class="junlabukdo"><input type="checkbox" name="location" value="전라남도">전라북도</li>
+                                                        <li class="kunhsangnamdo"><input type="checkbox" name="location" value="경상남도">경상남도</li>
+                                                        <li class="kunhsangbukdo"><input type="checkbox" name="location" value="경상북도">경상북도</li>
+                                                        <li class="chunchangnamdo"><input type="checkbox" name="location" value="충청남도">충청남도</li>
+                                                        <li class="chunchangbukdo"><input type="checkbox" name="location" value="충청북도">충청북도</li>
+                                                        <li class="busan"><input type="checkbox" name="location" value="부산">부산</li>
+                                                        <li class="jeju"><input type="checkbox" name="location" value="제주도">제주도</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="animalCheck categoryContent">
+                                                <div class="animalTop contentTitle">애완동물 출입여부</div>
+                                                <div class="animalCheckSelect">
+                                                    <ul>
+                                                        <li class="animalYes"><input type="radio" name="animalCheck" value="Yes">Yes</li>
+                                                        <li class="animalNo"><input type="radio" name="animalCheck" value="No">No</li>
+                                                        <li class="animalNotChoice"><input type="radio" id="NoCheck" name="animalCheck" value="NoCheck" checked="checked2" style="display: none"></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="campKinds categoryContent">
+                                                <div class="campKindsTop contentTitle">카라반/트레일러/글램핑</div>
+                                                <div class="campKindsSelect ">
+                                                    <ul>
+                                                        <li class="carvan"><input type="checkbox" name="campKinds" value="카라반">카라반</li>
+                                                        <li class="glamping"><input type="checkbox" name="campKinds" value="글램핑" >글램핑</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="category"><button type="button" onclick="categoryCamps()"> 찾아보기</button></div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="map">
+                                <div class="mapImage" id="map" ></div>
+                            </div>
+                        </div> <!--findCampsUseInfo-->
+                    </div> <!--test-->
+                </div> <!--mapWrap-->
+            </div>
+        </div>
+    </div>
+</div>
+<th:block layout:fragment="script">
+    <script src="https://code.jquery.com/jquery-1.8.0.js"
+            integrity="sha256-00Fh8tkPAe+EmVaHFpD+HovxWk7b97qwqVi7nLvjdgs="
+            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/946fabfe17.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=e3cb72ae1e875c47e83a78a91d17b8dd&libraries=clusterer"></script>
+    <script th:inline='javascript'>
+        var campMap= [[${campList}]];
+        var loginCheck=[[${member}]];
+        console.log(loginCheck);
+    </script>
+    <script type="text/javascript" src="/js/home.js"></script>
+    <script type="text/javascript" src="/js/loginCheck.js"></script>
+    <script type="text/javascript" src="/js/forHomeAndDetail.js"></script>
+</th:block>
+</html>

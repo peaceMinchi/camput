@@ -1,0 +1,82 @@
+@import url("/done/css/reset.css");
+/* 라인 */
+@font-face { font-family: 'LINESeedKR-Bd'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2'); font-weight: 700; font-style: normal; }
+/* 티머니 */
+@font-face { font-family: 'TmoneyRoundWindExtraBold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindExtraBold.woff') format('woff'); font-weight: normal; font-style: normal; }
+*{font-family:'TmoneyRoundWindExtraBold';-webkit-text-size-adjust: auto;}
+.wrap{
+    margin: 0 auto; width: 100%; height: 150vmax;
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+}
+.main{
+    width: 50%; height: 100%;
+    display: flex;
+    flex-direction: column; align-items: center;
+}
+.logo{
+    background-image: url(/camputFront/img/logo.png);
+    background-repeat: no-repeat; background-size: contain;
+    width: 15%; padding-bottom: 15%;
+    margin-top: 5%;
+}
+/* 스크롤제거 */
+body{
+    -ms-overflow-style: none; /* 인터넷 익스플로러 */
+    scrollbar-width: none; /* 파이어폭스 */
+}
+::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+}
+.joinBox{
+    margin-top: 5%;
+    width: 90%; height: 100%; padding: 2%;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+}
+/* 입력창 */
+.int{
+    border-radius: 15px; border: 0;
+    padding: 2%; margin: 1% 0; width: 50%;
+    font-size: 1vw; font-family: 'TmoneyRoundWindExtraBold';
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.joinBox h3{
+    width: 50%; text-align: left; font-size: 1.2vw;
+}
+.int_id{display: flex; align-items: center; flex-direction: column;}
+.loginBtn{
+    width: 50%; padding: 1.5%; border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: box-shadow 0.5s ease-in-out;
+    text-align: center; font-family: 'TmoneyRoundWindExtraBold';
+}
+.loginBtn:hover{
+    box-shadow: 0 80px 0 0  #ffa600 inset,
+                0 -80px 0 0 #ffa600 inset;
+}
+.addsBtn{
+    width: 50%; padding: 1.5%; border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: box-shadow 0.5s ease-in-out;
+    text-align: center; font-family: 'TmoneyRoundWindExtraBold';
+}
+.addsBtn:hover{
+    box-shadow: 0 80px 0 0  #ffa600 inset,
+                0 -80px 0 0 #ffa600 inset;
+}
+.submitButton{
+    margin: 1% 0;
+    box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.4);
+    border-radius: 20px; border: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #ffa600;
+    border-radius: 20px;
+    padding: 2%; margin: 1% 0; width: 20%;
+    font-size: 1.3vw; font-family: 'TmoneyRoundWindExtraBold';
+    transition: box-shadow 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+.submitButton:hover{
+    color: #fff;
+    box-shadow: 0 80px 0 0  #ffa600 inset,
+                0 -80px 0 0 #ffa600 inset;
+}
