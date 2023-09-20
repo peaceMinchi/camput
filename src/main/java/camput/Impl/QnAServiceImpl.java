@@ -60,7 +60,7 @@ public class QnAServiceImpl implements QnAService {
                 qnaDto.getMemberLoginId()
         );
         qnaRepository.save(qna);
-        // 엔티티에 메서드 만들어 줘야함
+        // 엔티티에 메서드 만들어 줘야함..
         return null;
     }
 
